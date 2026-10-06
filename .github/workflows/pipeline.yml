@@ -1,0 +1,21 @@
+name: Daily weather pipeline
+
+on:
+  schedule:
+    - cron: "0 12 * * *"   # every day at 12:00 UTC (8am Eastern)
+  workflow_dispatch:        # adds a button to run it by hand
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    env:
+      MOTHERDUCK_TOKEN: ${{ secrets.MOTHERDUCK_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests duckdb pandas
+      - run: python extract.py
+      - run: python transform.py
+      - run: python checks.py

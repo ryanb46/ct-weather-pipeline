@@ -16,7 +16,8 @@ response.raise_for_status()
 daily = response.json()["daily"]
 
 # 2. LOAD: save it into a table in weather.duckdb
-con = duckdb.connect("weather.duckdb")
+from db import connect
+con = connect()
 con.execute("""
     CREATE TABLE IF NOT EXISTS raw_weather (
         weather_date  DATE,

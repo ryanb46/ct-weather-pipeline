@@ -1,7 +1,8 @@
 import sys
 import duckdb
 
-con = duckdb.connect("weather.duckdb")
+from db import connect
+con = connect()
 
 # Each check counts BAD rows. 0 = pass.
 checks = {

@@ -1,7 +1,6 @@
 import duckdb
-
-con = duckdb.connect("weather.duckdb")
-
+from db import connect
+con = connect()
 con.execute("""
     CREATE OR REPLACE TABLE clean_weather AS
     WITH ranked AS (
