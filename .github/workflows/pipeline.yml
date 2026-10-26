@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install requests duckdb pandas
+      - run: pip install requests duckdb==1.5.6 pandas
       - run: python extract.py
       - run: python transform.py
       - run: python checks.py
